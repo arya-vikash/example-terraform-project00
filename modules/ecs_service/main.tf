@@ -115,3 +115,12 @@ resource "aws_ecs_service" "main" {
     }
   }
 }
+
+resource "aws_cloudwatch_log_group" "ecs_service_logs" {
+  name              = "/ecs/${var.name}-${var.environment}"
+  retention_in_days = 30
+  tags = {
+    Name        = "${var.name}-${var.environment}-logs"
+    Environment = var.environment
+  }
+}
